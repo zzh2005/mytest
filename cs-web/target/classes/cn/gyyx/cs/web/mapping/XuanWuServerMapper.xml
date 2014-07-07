@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gyyx.cs.persist.XuanWuServerMapper">
+	<resultMap id="serverResultMap" type="cn.gyyx.cs.model.ServerInfo">
+		<id column="code" property="code" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="game_id" property="gameId" jdbcType="INTEGER" />
+		<association property="game" column="game_id" javaType="cn.gyyx.cs.model.GameInfo" resultMap="cn.gyyx.cs.persist.GameMapper.serverGameResultMap"/>
+	</resultMap>
+	<select id="getServerList" resultMap="serverResultMap" parameterType="java.lang.Integer">
+		select A.code,A.name,game_id,B.name game_name
+		from xuanwu_server_tb A inner join game_tb B on A.game_id=B.code
+		where game_id = #{gameId,jdbcType=INTEGER}
+	</select>
+	<select id="getServerInfoByCode" resultMap="serverResultMap" parameterType="java.lang.Integer">
+		select A.code,A.name,game_id,B.name game_name
+		from xuanwu_server_tb A inner join game_tb B on A.game_id=B.code
+		where A.code = #{code,jdbcType=INTEGER}
+	</select>
+	<update id="updateServer" parameterType="cn.gyyx.cs.model.ServerInfo">
+		update xuanwu_server_tb set name = #{name,jdbcType=VARCHAR}
+		where code = #{code,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteServer" parameterType="java.lang.Integer">
+		delete from xuanwu_server_tb
+		where code = #{code,jdbcType=INTEGER}
+	</delete>
+</mapper>

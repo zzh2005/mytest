@@ -1,0 +1,35 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="${requestContext.contextPath}/contents/js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="${requestContext.contextPath}/contents/js/gameservices.js" type="text/javascript"></script>
+</head>
+<body>
+	<div>
+		<form name="form1" method="get">
+		<select id="ddlgame" name="gameId"></select>
+		<select id="ddlgameserver" name="serverId"></select>
+		<inputy type="hidden" id="hidGameId" name="hidGameId" value="$gameId" />
+		<inputy type="hidden" id="hidServerId" name="hidServerId" value="$serverId" />
+		<input type="submit" value="查询" />
+        </form>
+	</div>
+    <table>
+    	<tr><td>服务器编号</td><td>服务器名称</td><td>所属游戏编号</td><td>所属游戏名称</td><td>操作</td></tr>
+		#foreach($server in $servers)
+			<tr>
+				<td>$server.code</td>
+				<td>$server.name</td>
+				<td>$server.gameId</td>
+				<td>$server.game.name</td>
+				<td>
+					<a href="${requestContext.contextPath}/server/edit.do?gameId=${server.gameId}&serverId=${server.code}">修改</a>
+					<a href="${requestContext.contextPath}/server/delete.do?gameId=${server.gameId}&serverId=${server.code}">删除</a>
+				</td>
+			</tr>
+		#end
+    </table>
+</body>
+</html>

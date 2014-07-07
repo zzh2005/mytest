@@ -1,0 +1,20 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form name="form1" method="post">
+    <table>
+    	<tr><td>服务器编号：$server.code</td></tr>
+		<tr><td>服务器名称：<input name="name" type="text" value="$server.name" /></td></tr>
+		<tr><td>所属游戏编号：$server.game.code</td></tr>
+		<tr><td>所属游戏名称：$server.game.name</td></tr>
+		<tr><td><input type="submit" value="提交"/></td></tr>
+    </table>
+	<input type="hidden" name="game.code" value="$server.game.code" />
+	<input type="hidden" name="code" value="$server.code" />
+	</form>
+</body>
+</html>
